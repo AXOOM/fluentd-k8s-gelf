@@ -1,4 +1,4 @@
-FROM fluent/fluentd:latest
+FROM fluent/fluentd:v0.12.33
 LABEL maintainer="Andreas Bieber <andreas.bieber@axoom.com>"
 USER root
 WORKDIR /home/fluent
@@ -8,6 +8,7 @@ RUN set -ex \
     && apk add --no-cache --virtual .build-deps \
         build-base \
         ruby-dev \
+        libffi-dev \
     && echo 'gem: --no-document' >> /etc/gemrc \
     && gem install fluent-plugin-secure-forward \
     && gem install fluent-plugin-record-reformer \
@@ -15,6 +16,7 @@ RUN set -ex \
     && gem install fluent-plugin-kubernetes_metadata_filter \
     && gem install fluent-plugin-burrow \
     && apk del .build-deps \
+    && gem sources --clear-all \
     && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
 
 # Copy configuration files
