@@ -15,6 +15,7 @@ RUN set -ex \
     && gem install fluent-plugin-gelf-hs \
     && gem install fluent-plugin-kubernetes_metadata_filter \
     && gem install fluent-plugin-burrow \
+    && gem install fluent-plugin-detect-exceptions \
     && apk del .build-deps \
     && gem sources --clear-all \
     && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
@@ -30,6 +31,8 @@ COPY plugins /fluentd/plugins/
 # Environment variables
 ENV FLUENTD_OPT=""
 ENV FLUENTD_CONF="fluent.conf"
+ENV GELF_PROTOCOL="tcp"
+ENV GELF_PORT="12201"
 
 # Run Fluentd
 CMD exec fluentd -c /fluentd/etc/$FLUENTD_CONF -p /fluentd/plugins $FLUENTD_OPT
