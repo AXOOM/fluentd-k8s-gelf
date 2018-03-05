@@ -20,6 +20,8 @@ RUN set -ex \
     && gem sources --clear-all \
     && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
 
+RUN mkdir -p /fluentd/etc/config.d 
+
 # Copy configuration files
 COPY ./conf/fluent.conf /fluentd/etc/
 
