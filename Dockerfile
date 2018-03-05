@@ -14,7 +14,6 @@ RUN set -ex \
     && gem install fluent-plugin-record-reformer \
     && gem install fluent-plugin-gelf-hs \
     && gem install fluent-plugin-kubernetes_metadata_filter \
-    && gem install fluent-plugin-burrow \
     && gem install fluent-plugin-detect-exceptions \
     && apk del .build-deps \
     && gem sources --clear-all \
@@ -22,8 +21,6 @@ RUN set -ex \
 
 # Copy configuration files
 COPY ./conf/fluent.conf /fluentd/etc/
-COPY ./conf/kubernetes.conf /fluentd/etc/
-COPY ./conf/flatten.conf /fluentd/etc/
 
 # Copy plugins
 COPY plugins /fluentd/plugins/
