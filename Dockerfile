@@ -15,6 +15,7 @@ RUN set -ex \
     && gem install fluent-plugin-gelf-hs \
     && gem install fluent-plugin-kubernetes_metadata_filter \
     && gem install fluent-plugin-detect-exceptions \
+    && gem install fluent-plugin-systemd -v 0.3.1 \
     && apk del .build-deps \
     && gem sources --clear-all \
     && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
